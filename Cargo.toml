@@ -5,6 +5,9 @@ edition = "2021"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+[lib]
+crate-type = ["cdylib"]
+
 [dependencies]
 cfg-if = "1.0"
 log = "0.4.8"
@@ -14,5 +17,9 @@ chrono = { version = "0.4", default-features = false, features = ["clock", "std"
 [target.'cfg(not(all(target_arch = "wasm32", target_os = "unknown")))'.dependencies]
 getrandom = "0.2"
 
-[lib]
-crate-type = ["cdylib"]
+[profile.release]
+lto = true
+opt-level = 3
+codegen-units = 1
+panic = "abort"
+strip = "debuginfo"
