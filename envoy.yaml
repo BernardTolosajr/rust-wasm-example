@@ -1,0 +1,12 @@
+bootstrap_extensions:
+  - name: envoy.bootstrap.wasm
+    typed_config:
+      "@type": type.googleapis.com/envoy.extensions.wasm.v3.WasmService
+      singleton: true
+      config:
+        name: "hello_world"
+        vm_config:
+          runtime: "envoy.wasm.runtime.v8"
+          code:
+            local:
+              filename: "/etc/envoy/proxy-wasm-plugins/hello_world.wasm"
